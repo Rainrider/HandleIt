@@ -1,0 +1,10 @@
+## Interface: 70100
+## Title: Handle It
+## Version: 1
+## Author: Rainrider
+## Notes: Add your custom event handlers
+## SavedVariables: HandleItDB
+## OptDeps: AceConfig-3.0, AceConfigDialog-3.0
+
+options.lua
+core.lua
