@@ -101,8 +101,14 @@ function frame:ADDON_LOADED(_, _, name)
 		end
 	end
 
-	AceConfig:RegisterOptionsTable(addonName, addon.GetOptions(), '/handleit')
+	AceConfig:RegisterOptionsTable(addonName, addon.GetOptions())
 	AceConfigDialog:AddToBlizOptions(addonName)
+
+	_G.SLASH_HandleIt1 = '/handleit'
+	_G.SLASH_HandleIt2 = '/hit'
+	_G.SlashCmdList[addonName] = function()
+		InterfaceOptionsFrame_OpenToCategory(addonName)
+	end
 
 	self:UnregisterEvent('ADDON_LOADED')
 end
