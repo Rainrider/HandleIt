@@ -12,7 +12,7 @@ arguments, check some state or even save stuff to saved variables.
 
 ## How to use
 
-Type `/handleit` or `/hit` in the chat to open the options. Click "New event" or a select an existing one. Edit to your
+Type `/handleit` or `/hit` in the chat to open the options. Click "New event" or select an existing one. Edit to your
 liking.
 
 Anytime you change something, the event will be automatically disabled. Re-enable when you are done.
