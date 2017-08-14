@@ -1,10 +1,14 @@
-## Interface: 70100
+## Interface: 70200
 ## Title: Handle It
-## Version: 1
+## Version: @project-version@
 ## Author: Rainrider
 ## Notes: Add your custom event handlers
 ## SavedVariables: HandleItDB
-## OptDeps: AceConfig-3.0, AceConfigDialog-3.0
+## OptDeps: LibStub, Ace-3.0
 
+#@no-lib-strip@
+libs\LibStub\LibStub.lua
+libs\AceConfig-3.0\AceConfig-3.0.xml
+#@end-no-lib-strip@
 options.lua
 core.lua
