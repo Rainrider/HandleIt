@@ -1,11 +1,11 @@
 local addonName, addon = ...
-local coloredAddonName = _G.format("|cff0099CC%s|r", addonName)
+local coloredAddonName = string.format("|cff0099CC%s|r", addonName)
 
 local db
 
-local date = _G.date
-local print = _G.print
-local select = _G.select
+local date = date
+local print = print
+local select = select
 
 local mt = {
 	__call = function(t, self, ...)
@@ -15,10 +15,10 @@ local mt = {
 	end
 }
 
-local AceConfig = _G.LibStub('AceConfig-3.0')
-local AceConfigDialog = _G.LibStub('AceConfigDialog-3.0')
+local AceConfig = LibStub('AceConfig-3.0')
+local AceConfigDialog = LibStub('AceConfigDialog-3.0')
 
-local frame = _G.CreateFrame('Frame', 'etest')
+local frame = CreateFrame('Frame', 'etest')
 addon.frame = frame
 
 function frame:AddEvent(data)
@@ -90,8 +90,8 @@ frame:RegisterEvent('ADDON_LOADED')
 function frame:ADDON_LOADED(_, _, name)
 	if name ~= addonName then return end
 
-	_G.HandleItDB = _G.HandleItDB or {}
-	db = _G.HandleItDB
+	HandleItDB = HandleItDB or {}
+	db = HandleItDB
 	db.events = db.events or {}
 	addon.db = db
 
