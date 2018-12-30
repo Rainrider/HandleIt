@@ -56,8 +56,11 @@ function frame:AddEvent(data)
 	end
 
 	if data.unit1 or data.unit2 then
+		print('Registering unit event:', event, data.unit1, data.unit2)
 		self:RegisterUnitEvent(event, data.unit1, data.unit2)
+		print(self:IsEventRegistered(event))
 	else
+		print('Registering unitless event:', event, data.unit1, data.unit2)
 		self:RegisterEvent(event)
 	end
 end
@@ -65,6 +68,8 @@ end
 function frame:RemoveEvent(data)
 	local event = data.event
 	if not event then return end
+
+	print('Unregistering event:', event)
 
 	self:UnregisterEvent(event)
 	self[event] = nil
