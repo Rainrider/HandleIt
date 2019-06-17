@@ -5,7 +5,7 @@ arguments, check some state or even save stuff to saved variables.
 
 ## Features
 
-  - you can enable/disable events without loosing your handler code
+  - you can enable/disable events without losing your handler code
   - a default handler displaying all event arguments is provided
   - you can write stuff to the addon's SavedVariables from within your handler
   - you can register further events and add additional event handlers from within your handlers (use at your own risk)
@@ -17,8 +17,8 @@ liking.
 
 Anytime you change something, the event will be automatically disabled. Re-enable when you are done.
 
-In your handler you get the following arguments through `...`, the same way you get your addon's name and namespace in
-your addons, meaning you can name those whatever you like:
+In your handler you get the following arguments through `...`, the same way you get the addon's name and namespace in
+addons, meaning you can name those whatever you like:
 
   - self  - the frame the addon uses for event registration (_Frame_)
   - db    - a reference to the addon's global SavedVariables. Use this to save your state if needed (_table_)
