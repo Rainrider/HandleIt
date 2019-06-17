@@ -151,6 +151,18 @@ function addon.GetOptions()
 						order = 40,
 						multiline = 15,
 						width = 'full',
+						validate = function(_, value)
+							if value == '' then
+								return 'You should enter a handler.'
+							end
+
+							local _, err = loadstring(value, 'Event Handler code')
+							if err then
+								return string.format('Your event handler must evaluate to a function body.\n\n%s', err)
+							end
+
+							return true
+						end,
 					},
 				},
 			},
