@@ -38,7 +38,7 @@ function frame:AddEvent(data)
 				if func then
 					callbacks[#callbacks + 1] = func
 				else
-					print(err) -- TODO: error here?
+					error(err)
 				end
 			elseif type(callback) == 'function' then
 				callbacks[#callbacks + 1] = callback
@@ -56,7 +56,9 @@ function frame:AddEvent(data)
 	end
 
 	if data.unit1 or data.unit2 then
-		self:RegisterUnitEvent(event, data.unit1, data.unit2)
+		-- BUG: passing expplicit nil units makes RegisterUnitEvent
+		-- silently fall back to RegisterEvent
+		self:RegisterUnitEvent(event, data.unit1 or '', data.unit2 or '')
 	else
 		self:RegisterEvent(event)
 	end
