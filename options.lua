@@ -75,6 +75,32 @@ function addon.GetOptions()
 		return eventNames
 	end
 
+	local function ValidateEventUnit(_, unit)
+		-- empty units fall-back to RegisterEvent which is covered by event validation
+		if not unit or unit == '' then return true end
+
+		unit = unit:lower() -- the API does this internally
+		local frame = CreateFrame('Frame')
+		local eventName = db.events[event:GetSelected()].event
+		local isOK, err = pcall(frame.RegisterUnitEvent, frame, eventName, unit)
+		if not isOK then
+			-- BUG: the default error message is misleading
+			-- if it was a non-existing event, the event validation would have got this
+			if err:match('^Attempt to register unknown event') then
+				err = string.format('Attempt to register unitless event %q with unit %q.', eventName, unit)
+			end
+
+			return string.format('Unit event registration failed:\n\n%s.', err)
+		else
+			local _, registeredUnit = frame:IsEventRegistered(eventName)
+			if unit ~= registeredUnit then
+				return string.format('Invalid event unit %q.', unit)
+			end
+		end
+
+		return true
+	end
+
 	return {
 		name = 'Events',
 		type = 'group',
@@ -123,13 +149,20 @@ function addon.GetOptions()
 						order = 20,
 						width = 'full',
 						validate = function(_, value)
-							if not value or value == "" then
+							if not value or value == '' then
 								return 'You must enter an event name.'
 							end
+
 							for i = 1, #eventNames do
 								if eventNames[i] == value then
 									return 'An event with that name already exists.'
 								end
+							end
+
+							local frame = CreateFrame('Frame')
+							local isOK, err = pcall(frame.RegisterEvent, frame, value)
+							if not isOK then
+								return string.format('Event registration failed:\n\n%s.', err)
 							end
 
 							return true
@@ -139,11 +172,13 @@ function addon.GetOptions()
 						name = 'First unit',
 						type = 'input',
 						order = 30,
+						validate = ValidateEventUnit,
 					},
 					unit2 = {
 						name = 'Second unit',
 						type = 'input',
 						order = 35,
+						validate = ValidateEventUnit,
 					},
 					handler = {
 						name = 'Event handler',
