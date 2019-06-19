@@ -172,12 +172,18 @@ function addon.GetOptions()
 						name = 'First unit',
 						type = 'input',
 						order = 30,
+						set = function(info, value)
+							event:Set(info[#info], value:lower())
+						end,
 						validate = ValidateEventUnit,
 					},
 					unit2 = {
 						name = 'Second unit',
 						type = 'input',
 						order = 35,
+						set = function(info, value)
+							event:Set(info[#info], value:lower())
+						end,
 						validate = ValidateEventUnit,
 					},
 					handler = {
